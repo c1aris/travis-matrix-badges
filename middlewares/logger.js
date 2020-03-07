@@ -1,4 +1,4 @@
-/* Written by Ye Liu */
+/* Copyright (c) Ye Liu. All rights reserved. */
 
 import dateFormat from 'dateformat';
 
@@ -16,7 +16,8 @@ export default async (ctx, next) => {
         ctx.set('X-Response-Time', `${rt}ms`);
 
         // Log response time
-        console.log(`${qt} ${ctx.request.ip} ${ctx.method} ${ctx.url} - ${ctx.build || 'error'} - ${rt}ms`);
+        var state = ctx.badge && ctx.badge.info ? ctx.badge.info.state : undefined;
+        console.log(`${qt} ${ctx.request.ip} ${ctx.method} ${ctx.url} - ${state || 'error'} - ${rt}ms`);
     } catch (err) {
         // Log error
         console.error(`Catch Error: ${err && err.message ? err.message : err.toString()}`);

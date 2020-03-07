@@ -1,4 +1,4 @@
-/* Written by Ye Liu */
+/* Copyright (c) Ye Liu. All rights reserved. */
 
 import _ from 'lodash';
 import { readdirSync, statSync } from 'fs';

@@ -18,7 +18,9 @@ app.context.db = new knex({
 // Bind middlewares
 app
     .use(middlewares.logger)
-    .use(middlewares.handler);
+    .use(middlewares.parser)
+    .use(middlewares.handler)
+    .use(middlewares.database);
 
 // Start web service
 app.listen(CONF.port, CONF.ip, () => console.log(`Listening on port ${CONF.port}...`));

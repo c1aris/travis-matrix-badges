@@ -7,8 +7,11 @@ export default {
     // Server listening IP
     ip: '0.0.0.0',
 
+    // Shields IO URL
+    shieldsUrl: 'https://img.shields.io/badge',
+
     // MySQL
-    mysql_connection: {
+    db_connection: {
         host: 'localhost',
         user: '',
         password: '',
