@@ -10,15 +10,15 @@ const HEADERS = { 'Accept': 'application/vnd.travis-ci.2.1+json' };
 
 
 export default async (ctx, next) => {
-    const baseUrl = ctx.badge.branch.suffix == 'org' ? BASE_URL_ORG : BASE_URL_COM;
+    const baseUrl = ctx.token.branch.suffix == 'org' ? BASE_URL_ORG : BASE_URL_COM;
 
     // Fetch repo info
-    var url = `${baseUrl}/repos/${ctx.badge.repo}/branches/${ctx.badge.branch}`;
+    var url = `${baseUrl}/repos/${ctx.token.repo}/branches/${ctx.token.branch}`;
     var res = await axios.get(url, { headers: HEADERS }).catch(err => { return err; });
     if (res.status == 200) {
-        var jobId = res.data.branch.job_ids[ctx.badge.job - 1];
+        var jobId = res.data.branch.job_ids[ctx.token.job - 1];
     } else {
-        ctx.body = `ERROR: Unable to fetch repo: ${ctx.badge.repo}`;
+        ctx.body = `ERROR: Unable to fetch repo: ${ctx.token.repo}`;
         return;
     }
 
@@ -49,14 +49,15 @@ export default async (ctx, next) => {
     if (res.status == 200) {
         ctx.set({ 'content-type': 'image/svg+xml;charset=utf-8' });
         ctx.body = res.data;
+        ctx.cache = res.data;
     } else {
         ctx.body = `ERROR: Unable to fetch Shields IO`;
         return;
     }
 
     // Pack badge info
-    ctx.badge.info = {
-        repo: ctx.badge.repo,
+    ctx.badge = {
+        repo: ctx.token.repo,
         state: state,
         lastRequestIp: ctx.request.ip,
         lastRequestTime: new Date()

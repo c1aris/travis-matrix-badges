@@ -19,6 +19,7 @@ app.context.db = new knex({
 app
     .use(middlewares.logger)
     .use(middlewares.parser)
+    .use(middlewares.cache)
     .use(middlewares.handler)
     .use(middlewares.database);
 

@@ -16,7 +16,7 @@ export default async (ctx, next) => {
         ctx.set('X-Response-Time', `${rt}ms`);
 
         // Log response time
-        var state = ctx.badge && ctx.badge.info ? ctx.badge.info.state : undefined;
+        var state = ctx.badge ? ctx.badge.state : undefined;
         console.log(`${qt} ${ctx.request.ip} ${ctx.method} ${ctx.url} - ${state || 'error'} - ${rt}ms`);
     } catch (err) {
         // Log error

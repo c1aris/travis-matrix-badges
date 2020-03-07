@@ -9,7 +9,7 @@ export default async (ctx, next) => {
     }
 
     // Pack tokens
-    ctx.badge = {
+    ctx.token = {
         repo: `${tokens[0]}/${tokens[1]}`,
         branch: tokens[2],
         job: tokens[3],
