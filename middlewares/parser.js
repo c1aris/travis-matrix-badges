@@ -8,6 +8,7 @@ export default async (ctx, next) => {
         return;
     }
 
+    // Pack tokens
     ctx.badge = {
         repo: `${tokens[0]}/${tokens[1]}`,
         branch: tokens[2],

@@ -12,7 +12,7 @@ const HEADERS = { 'Accept': 'application/vnd.travis-ci.2.1+json' };
 export default async (ctx, next) => {
     const baseUrl = ctx.badge.branch.suffix == 'org' ? BASE_URL_ORG : BASE_URL_COM;
 
-    // Fetch repo inoformation
+    // Fetch repo info
     var url = `${baseUrl}/repos/${ctx.badge.repo}/branches/${ctx.badge.branch}`;
     var res = await axios.get(url, { headers: HEADERS }).catch(err => { return err; });
     if (res.status == 200) {
@@ -22,7 +22,7 @@ export default async (ctx, next) => {
         return;
     }
 
-    // Fetch job information
+    // Fetch job info
     url = `${baseUrl}/jobs/${jobId}`;
     res = await axios.get(url, { headers: HEADERS }).catch(err => { return err; });
     if (res.status == 200) {
@@ -32,6 +32,7 @@ export default async (ctx, next) => {
         return;
     }
 
+    // Construct badge url
     switch (state) {
         case 'passed':
             var badgeUrl = `${CONF.shieldsUrl}/build-passing-brightgreen.svg`;
@@ -43,6 +44,7 @@ export default async (ctx, next) => {
             var badgeUrl = `${CONF.shieldsUrl}/build-${state}-yellow.svg`;
     }
 
+    // Fetch badge
     res = await axios.get(badgeUrl).catch(err => { return err; });
     if (res.status == 200) {
         ctx.set({ 'content-type': 'image/svg+xml;charset=utf-8' });
@@ -52,6 +54,7 @@ export default async (ctx, next) => {
         return;
     }
 
+    // Pack badge info
     ctx.badge.info = {
         repo: ctx.badge.repo,
         state: state,
@@ -60,5 +63,7 @@ export default async (ctx, next) => {
     };
 
     // Call next middleware
-    await next();
+    if (CONF.enable_db) {
+        await next();
+    }
 };

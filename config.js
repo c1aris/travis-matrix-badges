@@ -11,6 +11,7 @@ export default {
     shieldsUrl: 'https://img.shields.io/badge',
 
     // MySQL
+    enable_db: false,
     db_connection: {
         host: 'localhost',
         user: '',

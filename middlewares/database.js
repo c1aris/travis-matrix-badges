@@ -5,10 +5,12 @@ import knex from 'knex';
 import CONF from '../config';
 
 // Connect to database
-const db = new knex({
-    client: 'mysql',
-    connection: CONF.db_connection
-});
+if (CONF.enable_db) {
+    var db = new knex({
+        client: 'mysql',
+        connection: CONF.db_connection
+    });
+}
 
 export default async (ctx, next) => {
     // Return badge first
