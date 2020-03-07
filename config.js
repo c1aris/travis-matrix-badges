@@ -7,18 +7,11 @@ export default {
     // Server listening IP
     ip: '0.0.0.0',
 
-    // Shields IO URL
-    shieldsUrl: 'https://img.shields.io/badge',
-
     // Redis
     enable_cache: false,
     redis_connection: {
         host: 'localhost',
-        port: 6379,
-        options: {
-            password: '',
-            timeout: 3000
-        }
+        port: 6379
     },
     expire: 1800,
 

@@ -7,6 +7,7 @@ import CONF from '../config';
 const BASE_URL_ORG = 'https://api.travis-ci.org';
 const BASE_URL_COM = 'https://api.travis-ci.com';
 const HEADERS = { 'Accept': 'application/vnd.travis-ci.2.1+json' };
+const SHIELDS_IO_URL = 'https://img.shields.io/badge';
 
 
 export default async (ctx, next) => {
@@ -35,13 +36,13 @@ export default async (ctx, next) => {
     // Construct badge url
     switch (state) {
         case 'passed':
-            var badgeUrl = `${CONF.shieldsUrl}/build-passing-brightgreen.svg`;
+            var badgeUrl = `${SHIELDS_IO_URL}/build-passing-brightgreen.svg`;
             break;
         case 'failed':
-            var badgeUrl = `${CONF.shieldsUrl}/build-failure-red.svg`;
+            var badgeUrl = `${SHIELDS_IO_URL}/build-failure-red.svg`;
             break;
         default:
-            var badgeUrl = `${CONF.shieldsUrl}/build-${state}-yellow.svg`;
+            var badgeUrl = `${SHIELDS_IO_URL}/build-${state}-yellow.svg`;
     }
 
     // Fetch badge

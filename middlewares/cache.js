@@ -10,22 +10,32 @@ if (CONF.enable_cache) {
 }
 
 export default async (ctx, next) => {
-    // Check if cache exists
-    const badge = cache.get(ctx.token.repo, redis.print);
+    // Construct cache key
+    const key = `${ctx.token.repo}/${ctx.token.branch}/${ctx.token.job}`;
 
-    if (badge) {
-        ctx.set({ 'content-type': 'image/svg+xml;charset=utf-8' });
-        ctx.body = badge;
-        ctx.badge = { state: 'cache' }
-        return;
+    if (!ctx.query.no_cache) {
+        // Check if cache exists
+        const badge = await new Promise((resolve) => {
+            cache.get(key, (_, res) => {
+                return resolve(res);
+            });
+        });
+
+        // Use cache if cache exists
+        if (badge) {
+            ctx.set({ 'content-type': 'image/svg+xml;charset=utf-8' });
+            ctx.body = badge;
+            ctx.badge = { state: 'cache' }
+            return;
+        }
     }
 
     // Call next middleware
-    next();
+    await next();
 
     // Create cache
     if (ctx.cache) {
-        cache.set(ctx.token.repo, ctx.cache, redis.print);
-        cache.expire(ctx.token.repo, CONF.expire);
+        cache.set(key, ctx.cache);
+        cache.expire(key, CONF.expire);
     }
 };

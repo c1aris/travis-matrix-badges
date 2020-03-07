@@ -13,7 +13,7 @@ export default async (ctx, next) => {
         repo: `${tokens[0]}/${tokens[1]}`,
         branch: tokens[2],
         job: tokens[3],
-        suffix: tokens[4]
+        suffix: tokens[4].split('?')[0]
     };
 
     // Call next middleware
