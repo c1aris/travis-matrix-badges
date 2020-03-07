@@ -1,0 +1,30 @@
+{
+  "name": "travis-matrix-badges",
+  "version": "1.0.0",
+  "description": "The missing matrix badges for build status of each travis job.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/c1aris/travis-matrix-badges.git"
+  },
+  "author": "c1aris",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/c1aris/travis-matrix-badges/issues"
+  },
+  "homepage": "https://github.com/c1aris/travis-matrix-badges#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "babel-core": "^6.26.3",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "dateformat": "^3.0.3",
+    "knex": "^0.20.11",
+    "koa": "^2.11.0",
+    "mysql": "^2.18.1"
+  }
+}
