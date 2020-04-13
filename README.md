@@ -7,7 +7,7 @@ A lightweight web server based on Koa2 to produce badges of the build states in 
 To enable job-related build states, you may just configure the travis badge with the following url:
 
 ```
-https://catcatserver.xyz/badge/${username}/${repo}/${branch}/${job}/${suffix}[?no_cache=true]
+https://catcatserver.xyz/api/badge/${username}/${repo}/${branch}/${job}/${suffix}[?no_cache=true]
 ```
 
 Here, `job` is the index of the job in a build, i.e. `1` for the first job and `5` for the fifth job. `suffix` could be `org` or `com`, representing different travis editions 'travis-ci.org' and 'travis-ci.com'.
