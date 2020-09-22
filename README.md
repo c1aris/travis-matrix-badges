@@ -4,7 +4,7 @@ A light-weight web server based on Koa2 to produce badges of the build states in
 
 ### Installation
 
-If you would like to setup the service on your own server, clone the whole project using:
+Clone the whole project using:
 
 ```
 git clone https://github.com/yeliudev/travis-matrix-badges.git
