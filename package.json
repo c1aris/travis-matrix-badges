@@ -17,14 +17,15 @@
   },
   "homepage": "https://github.com/c1aris/travis-matrix-badges#readme",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.20.0",
     "babel-core": "^6.26.3",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
     "dateformat": "^3.0.3",
-    "knex": "^0.20.11",
-    "koa": "^2.11.0",
+    "knex": "^0.21.6",
+    "koa": "^2.13.0",
+    "lodash": "^4.17.20",
     "mysql": "^2.18.1",
     "redis": "^3.0.2"
   }

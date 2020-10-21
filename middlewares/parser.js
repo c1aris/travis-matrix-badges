@@ -3,7 +3,7 @@
 export default async (ctx, next) => {
     // Parse tokens
     const tokens = ctx.request.url.split('/').slice(1);
-    if (tokens.length != 5) {
+    if (tokens.length != 4) {
         ctx.body = `ERROR: Unable to parse url: ${ctx.request.url}`;
         return;
     }
@@ -12,8 +12,7 @@ export default async (ctx, next) => {
     ctx.token = {
         repo: `${tokens[0]}/${tokens[1]}`,
         branch: tokens[2],
-        job: tokens[3],
-        suffix: tokens[4].split('?')[0]
+        job: tokens[3]
     };
 
     // Call next middleware

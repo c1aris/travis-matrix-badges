@@ -2,7 +2,7 @@ SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for repos
+-- Table structure for repo
 -- ----------------------------
 DROP TABLE IF EXISTS `repo`;
 CREATE TABLE `repo` (

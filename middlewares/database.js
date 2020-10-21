@@ -17,14 +17,14 @@ export default async (ctx, next) => {
     next();
 
     // Update database
-    const res = await db.select('repo').from('repos').where('repo', ctx.badge.repo);
+    const res = await db.select('repo').from('repo').where('repo', ctx.badge.repo);
 
     if (res.length > 0) {
         var badge = ctx.badge;
         var repo = badge.repo;
         delete badge.repo;
-        await db('repos').update(badge).where('repo', repo);
+        await db('repo').update(badge).where('repo', repo);
     } else {
-        await db('repos').insert(ctx.badge);
+        await db('repo').insert(ctx.badge);
     }
 };

@@ -4,17 +4,14 @@ import axios from 'axios';
 
 import CONF from '../config';
 
-const BASE_URL_ORG = 'https://api.travis-ci.org';
-const BASE_URL_COM = 'https://api.travis-ci.com';
+const BASE_URL = 'https://api.travis-ci.com';
 const HEADERS = { 'Accept': 'application/vnd.travis-ci.2.1+json' };
 const SHIELDS_IO_URL = 'https://img.shields.io/badge';
 
 
 export default async (ctx, next) => {
-    const baseUrl = ctx.token.branch.suffix == 'org' ? BASE_URL_ORG : BASE_URL_COM;
-
     // Fetch repo info
-    var url = `${baseUrl}/repos/${ctx.token.repo}/branches/${ctx.token.branch}`;
+    var url = `${BASE_URL}/repos/${ctx.token.repo}/branches/${ctx.token.branch}`;
     var res = await axios.get(url, { headers: HEADERS }).catch(err => { return err; });
     if (res.status == 200) {
         var jobId = res.data.branch.job_ids[ctx.token.job - 1];
@@ -24,7 +21,7 @@ export default async (ctx, next) => {
     }
 
     // Fetch job info
-    url = `${baseUrl}/jobs/${jobId}`;
+    url = `${BASE_URL}/jobs/${jobId}`;
     res = await axios.get(url, { headers: HEADERS }).catch(err => { return err; });
     if (res.status == 200) {
         var state = res.data.job.state;
