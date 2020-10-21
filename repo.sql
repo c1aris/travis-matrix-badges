@@ -4,8 +4,8 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 -- Table structure for repos
 -- ----------------------------
-DROP TABLE IF EXISTS `repos`;
-CREATE TABLE `repos` (
+DROP TABLE IF EXISTS `repo`;
+CREATE TABLE `repo` (
   `repo` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `state` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `lastRequestIp` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
